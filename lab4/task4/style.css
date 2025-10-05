@@ -1,0 +1,47 @@
+p.text-background span {
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+div.text-background span {
+    background-color: yellow;
+}
+/* 4.3 */
+span span {
+    background-color: gray;
+    text-decoration: line-through;
+}
+/* 4.4 */
+ol span span {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+/* 4.5 */
+section > p {
+    text-shadow: 3px 3px 5px black;
+}
+/* 4.6 */
+li ul {
+    list-style-image: url(./li.svg);
+}
+/* 4.7 */
+div > p.text-background {
+    word-spacing: 50px;
+}
+/* 4.8 */
+div.text-bold > p {
+    font-weight: bold;
+}
+/* 4.9 */
+div.text-bold > section > p {
+    line-height: 45px;
+}
+/* 4.10 */
+img + p {
+    background-color: brown;
+}
+/* 4.11 */
+section ~ p {
+    color: red;
+}

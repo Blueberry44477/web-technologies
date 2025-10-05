@@ -1,0 +1,40 @@
+.recipe {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-warning {
+    color: red;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+#unique {
+    font-family: monospace;
+    font-size: 20px;
+    font-style: italic;
+}
+
+hr {
+    /* background-color: red; */
+    background: linear-gradient(to right, red, purple);
+    border: none;
+    border-radius: 5px;
+    height: 5px;
+    width: 50%;
+    margin: 20px auto;
+}

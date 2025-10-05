@@ -1,0 +1,32 @@
+.prettier {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+/* 3.1 */
+a {
+    color: red;
+}
+/* 3.2 */
+.list__item-main {
+    color: purple;
+}
+/* 3.3 */
+.list__submenu--square {
+    list-style-type: square;
+}
+/* 3.4 */
+.list__submenu--pictogram {
+    list-style-image: url(li.svg);
+}
+/* 3.5 */
+.list .list__item .list__submenu {
+    list-style: none;
+}
+/* 3.6 */
+.list__submenu--square  a {
+    text-decoration: none;
+}
+/* 3.7 */
+ol {
+    list-style-position: inside;
+}
