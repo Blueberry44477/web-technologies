@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="make-prettier">
+    <header>
+        <p><a href="../task2/index.html">Перейти до завдання 2.</a></p>
+        <h1>Завдання 3</h1>
+    </header>
+
+    <main>
+        <!-- <form action="" method="get"> -->
+        <form class="form" action="https://example.com/upload" method="post" enctype="multipart/form-data">
+            <fieldset class="form__group">
+                <legend class="form__group-legend">Особисті дані</legend>
+
+                <!-- текстові поля input type="text" -->
+                <div class="form__field">
+                    <label class="form__field-label" for="fullname">Повне ім'я:</label>
+                    <input class="form__field-input" type="text" id="fullname" name="fullname" 
+                           placeholder="Введіть ваше ім'я" tabindex="1" value="" required>    
+                </div>
+
+                <!-- поле паролю input type="password" -->
+                <!-- pattern з 6+ символів, 1 велика літера, 1 мала , 1 цифра -->
+                <div class="form__field">
+                    <label class="form__field-label" for="password">Пароль:</label>
+                    <input class="form__field-input" type="password" id="password" name="password"
+                           placeholder="6 chars (big & small) and a digit" 
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$" 
+                           tabindex="2" value="" required>
+                </div>
+
+                <!-- поле email input type="email"; -->
+                <!-- для поля email відключити автозаповнення за допомогою атрибуту autocomplete="off" -->
+                <!-- для полів email та tel використати атрибут pattern і задати
+                     регулярні вирази для перевірки коректності цих полів -->
+                <div class="form__field">
+                    <label class="form__field-label" for="email">Email:</label>
+                    <input class="form__field-input" type="email" id="email" name="email" 
+                           placeholder="example@mail.com" autocomplete="off" 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                           tabindex="3" value="" required>
+                </div>
+
+                <!-- поле мобільного номера input type="tel" -->
+                </div class="form__field">
+                    <label class="form__field-label" for="phone">Мобільний номер:</label>
+                    <input class="form__field-input" type="tel" id="phone" name="phone" 
+                           placeholder="+380123456789" pattern="\+380\d{9}" 
+                           tabindex="4" value="" required>
+                <div>
+
+                <!-- поле дати input type="date" -->
+                <div class="form__field">
+                    <label class="form__field-label" for="birthdate">Дата народження:</label>
+                    <input class="form__field-input" type="date" id="birthdate" 
+                           name="birthdate" tabindex="5" value="" required>
+                </div>
+            </fieldset>
+
+            <fieldset class="form__group">
+                <legend class="form__group-legend">Опитування</legend>
+                
+                <!-- не менше двох блоків radio-buttons input type="radio" по три значення в кожному з
+                     блоків, передбачивши застосування для одного з значень другого блоку активність за
+                     замовчуванням (атрибут checked) -->
+                <fieldset class="form__subgroup">
+                    <legend class="form__subgroup-legend">Your mood:</legend>
+
+                    <label class="form__subgroup-option">
+                        <input class="form__subgroup-radio" type="radio" 
+                               name="mood" value="fine" tabindex="6">
+                        Fine
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input class="form__subgroup-radio" type="radio" 
+                               name="mood" value="mid" tabindex="7" checked>
+                        Mid
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input class="form__subgroup-radio" type="radio" 
+                               name="mood" value="bad" tabindex="8">
+                        Bad
+                    </label>
+                </fieldset>
+
+                <fieldset class="form__subgroup">
+                    <legend class="form__subgroup-legend">Favourite lesson:</legend>
+
+                    <label class="form__subgroup-option">
+                        <input type="radio" name="subject" 
+                               value="web-technologes" tabindex="9"
+                               class="form__subgroup-radio">
+                        Web-technologes
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input type="radio" name="subject"
+                               value="software_engineering_principles" tabindex="10" checked
+                               class="form__subgroup-radio">
+                        Software engineering principles
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input type="radio" name="subject" 
+                               value="philosophy" tabindex="11"
+                               class="form__subgroup-radio">
+                        Philosophy
+                    </label>
+                </fieldset>
+                
+                <!-- блок check-buttons input type="checkbox" із чотирма значеннями -->
+                <fieldset class="form__subgroup">
+                    <legend class="form__subgroup-legend">Hobbies:</legend>
+
+                    <label class="form__subgroup-option">
+                        <input type="checkbox" name="hobby" 
+                               value="Sports" tabindex="12"
+                               class="form__subgroup-checkbox">
+                        Sports
+                    </label>
+                    
+                    <label class="form__subgroup-option">
+                        <input type="checkbox" name="hobby" 
+                               value="Music" tabindex="13"
+                               class="form__subgroup-checkbox">
+                        Music
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input type="checkbox" name="hobby" 
+                               value="Reading" tabindex="14"
+                               class="form__subgroup-checkbox">
+                        Reading
+                    </label>
+
+                    <label class="form__subgroup-option">
+                        <input type="checkbox" name="hobby" 
+                               value="Gaming" tabindex="15"
+                               class="form__subgroup-checkbox">
+                        Gaming
+                    </label>
+                </fieldset>
+
+                <!-- випадний список (теги select + option) із п’ятьма 
+                     значеннями, в якого третє значення визначене за 
+                     замовчуванням (атрибут selected) -->
+                <div class="form__field">
+                    <label for="country" class="form__field-label">Your country:</label>
+                    <select id="country" name="country" tabindex="16"
+                            class="form__field-select">
+                        <option value="ukraine">Ukraine</option>
+                        <option value="poland">Poland</option>
+                        <option value="germany" selected>Germany</option>
+                        <option value="france">France</option>
+                        <option value="italy">Italy</option>
+                    </select>
+                </div>
+                
+                <!-- випадний список із шістьма значеннями з можливістю множинного
+                     вибору (атрибут multiple) -->
+                <div class="form__field">
+                    <label for="languages" class="form__field-label">Your Languages:</label>
+                    <select multiple id="languages" name="languages" tabindex="17"
+                            class="form__field-input">
+                        <option value="ukrainian">Ukrainian</option>
+                        <option value="english">English</option>
+                        <option value="german">German</option>
+                        <option value="french">French</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="italian">Italian</option>
+                    </select>
+                </div>
+                
+                <!-- випадний список з чотирма групами пунктів по три значення
+                     в кожній групі (тег optgroup) -->
+                <div class="form__field">
+                    <label for="subjects" class="form__field-label">Favorite subject:</label>
+                    <select id="subjects" name="subjects_group" class="form__field-select">
+
+                        <optgroup label="Physical and Mathematical">
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="computer_science">Computer Science</option>
+                        </optgroup>
+
+                        <optgroup label="Humanities">
+                            <option value="history">History</option>
+                            <option value="philosophy">Philosophy</option>
+                            <option value="literature">Literature</option>
+                        </optgroup>
+
+                        <optgroup label="Arts">
+                            <option value="music">Music</option>
+                            <option value="painting">Painting</option>
+                            <option value="theater">Theater</option>
+                        </optgroup>
+
+                        <optgroup label="Sports">
+                            <option value="football">Football</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="tennis">Tennis</option>
+                        </optgroup>
+                    </select>
+                </div>
+              
+                <!-- випадний список із підказками (тег datalist) -->
+                <div class="form__field">
+                    <label for="hints" class="form__field-label">Your favourite browser:</label>
+                    <input list="browsers" id="hints" name="browser" 
+                           placeholder="Choose browser" tabindex="18"
+                           class="form__field-input">
+                    <datalist id="browsers">
+                        <option value="Chrome">
+                        <option value="Firefox!">
+                        <option value="Opera">
+                        <option value="Safari">
+                    </datalist>
+                </div>
+                
+                <!-- кнопку завантаження файлів input type="file" – з умовою завантаження тільки аудіо-
+                     файлів і більше ніж одного файлу (атрибути accept + multiple -->
+                <div class="form__field">
+                    <label for="file_upload" class="form__field-label">Load audio:</label>
+                    <input type="file" id="file_upload" name="audio_files" 
+                           multiple accept="audio/*" tabindex="19"
+                           class="form__field-input-file">
+                </div>
+
+                <!-- кнопки type="submit" та type="reset" -->
+                <div class="form__actions">
+                    <input type="submit" value="Надіслати" tabindex="20" class="form__button form__button--submit">
+                    <input type="reset" value="Скинути" tabindex="21" class="form__button form__button--reset">
+                </div>
+                
+            </fieldset>
+        </form>
+    </main>
+
+    
+</body>
+</html>
