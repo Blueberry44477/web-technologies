@@ -1,0 +1,88 @@
+.prettier {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center-wrapper {
+    width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+/* Logo */
+.logo {
+    display: inline-block;
+}
+
+.logo__link {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.logo__image {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+/* Horizontal Menu ---------------------------------------- */
+.horizontal-menu {
+    display: inline-block;
+}
+
+.horizontal-menu__list {
+    list-style: none;
+    margin: 0;
+}
+
+.horizontal-menu__list-item {
+    margin: 10px;
+    float: left;
+}
+
+.horizontal-menu__list-reference {
+    display: inline-block;
+    text-decoration: none;
+
+    background-color: #ffecd1;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px dashed black;
+}
+
+/*  */
+.wrapper {
+    width: 100%;
+    padding: 10px 30px;
+    margin: 20px 0 ;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
+
+.wrapper__heading {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.wrapper__text {
+    text-align: left;
+}
+
+.wrapper__inner {
+    width: 40%;
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 20px 50px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
