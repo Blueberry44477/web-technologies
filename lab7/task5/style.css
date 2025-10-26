@@ -1,0 +1,83 @@
+.weather {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    background-color: #a4a4a4;
+}
+
+.weather__current {
+    position: absolute;
+    left: 30px;
+    top: 10px;
+
+    width: 150px;
+    height: 130px;
+    background-color: black;
+    z-index: 2;
+
+}
+
+.weather__current-image {
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    width: 180px;
+    height: 100px;
+}
+
+.weather__current-temperature {
+    position: absolute;
+    font-size: 24px;
+    bottom: 3px;
+    left: 5px;
+    color: #a4a4a4;
+    font-weight: bold;
+}
+
+.weather__forecast-wrapper {
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 2px;
+}
+
+.weather__forecast {
+    font-size: 10px;
+    display: block;
+    background-color: #c1c1c1;
+    padding: 10px;
+    padding-top: 30px;
+    box-shadow: 5px 5px 0 0 grey;
+}
+
+.weather__forecast-item {
+    display: inline-block;
+}
+.weather__forecast-item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.weather__forecast-day {
+    opacity: 0.5;
+}
+
+.arrows {
+    position: absolute;
+    top: 25%;
+    left: 8px;
+    display: block;
+    background-color: grey;
+    height: 20px;
+    z-index: 3;
+    opacity: 0.8;
+    box-shadow: 0 0 1px 1px;
+
+}
+.rotate {
+    transform: rotate(180deg);
+}
+
+
+

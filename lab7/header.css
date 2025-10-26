@@ -1,0 +1,34 @@
+.center-wrapper {
+    width: 1140px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+
+    border-radius: 20px;
+}
+
+/* Horizontal Menu ---------------------------------------- */
+.horizontal-menu {
+    display: inline-block;
+}
+
+.horizontal-menu__list {
+    list-style: none;
+    margin: 0;
+}
+
+.horizontal-menu__list-item {
+    margin: 10px;
+    float: left;
+}
+
+.horizontal-menu__list-reference {
+    display: inline-block;
+    text-decoration: none;
+
+    background-color: #ffecd1;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px dashed black;
+}

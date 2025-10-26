@@ -1,0 +1,51 @@
+.container {
+    padding: 20px;
+}
+
+.left {
+    position: relative;
+    width: 140px;
+}
+
+.wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.block {
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+}
+
+.block1_1,
+.block1_2 {
+    margin-bottom: 5px;
+    background: green;
+    cursor: pointer;
+}
+
+.block2 {
+    position: absolute;
+    top: 0;
+    left: 130px;
+    width: 160px;
+    height: 200px;
+    background: steelblue;
+    display: none;
+}
+
+.block2_1 {
+    left: 150px;
+}
+
+.block2_2 {
+    left: 340px;
+    transform: translateY(-23%);
+}
+
+.wrapper:hover .block2 {
+    display: block;
+}

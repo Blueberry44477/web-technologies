@@ -1,0 +1,251 @@
+.prettier {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form {
+    width: 620px;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+    border: 20px solid #868686;
+    background-image: url(./image.png);
+}
+
+/* Form heading */
+.form__heading {
+    position: relative;
+    margin: 20px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 25px;
+    color: #7d21b3;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.form__heading::first-letter {
+    font-size: 50px;
+    color: pink;
+}
+
+/* Lines */
+.wrapper--lines {
+    position: relative;
+}
+
+.wrapper--lines::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 25%;
+    height: 3px;
+    background-color: purple;
+}
+
+.wrapper--lines::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 25%;
+    height: 3px;
+    background-color: purple;
+}
+
+/* Line under heading */
+.wrapper--line-underneath::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    height: 3px;
+    transform: translateX(-50%);
+    background-color: purple;
+    transition: background-color 0.3s;
+}
+
+/* Lines Hover */
+.wrapper--lines:hover::before,
+.wrapper--lines:hover::after {
+    background-color: transparent;
+}
+
+.wrapper--line-underneath:hover::after {
+    width: 80%;
+    background-color: green;
+}
+
+/* Heading text */
+.form__heading::before {
+    content: "Заповніть Форму";
+}
+
+.form__heading:hover::before {
+    content: "Ми вдячні вам"; 
+}
+
+/*  */
+.form-row .form__field {
+    display: inline-block;
+}
+
+.form__row {
+    margin: 20px 0;
+}
+
+.form__row::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.form__field-label {
+    margin-bottom: 5px;
+    display: block;
+    color: white;
+    font-size: 18px;
+}
+
+.form__field-input {
+    font-weight: 700;
+    text-indent: 20px;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    opacity: 0.6;
+}
+
+.form__field-input:hover {
+    border-bottom: 4px solid #fbff00;
+}
+
+.form__field-input:focus {
+    border-bottom: 4px solid #ffa600;
+}
+
+.form__field-input[type="password"]:hover {
+    border-bottom: 4px solid #1eff00;
+}
+
+.form__field-input[type="password"]:focus {
+    border-bottom: 4px solid #00ffea;
+}
+
+textarea.form__field-input:hover {
+    box-shadow: 10px 10px rgba(233, 27, 154, 0.6);
+}
+
+/* Ignored */
+textarea.form__field-input::first-line {
+    color: red;
+}
+
+/* Input */
+.form__field-input--narrow {
+    width: 250px;
+    height: 30px;
+    display: block;
+}
+
+.form__field-input--wide {
+    width: 540px;
+    height: 46px;
+    resize: none;
+}
+
+/* Float */
+.form__item--left {
+    float: left;
+}
+
+.form__item--right {
+    float: right;
+}
+
+/* Buttons */
+.form__actions {
+    width: 340px;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+/* .form__actions .form__button:not(:last-child) {
+    margin-right: 20px;
+} */
+
+.form__button {
+    position: relative; /* for icons */
+    width: 160px;
+    height: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form__button--submit {
+    color: #0097a7;
+    border: 3px solid #0097a7;
+}
+
+.form__button--submit:hover {
+    color: white;
+    border: 3px solid #0097a7;
+    border-radius: 15px;
+    background-color: #0097a7;
+}
+
+.form__button--submit:active {
+    position: relative;
+    border: 3px solid #ecfd00;
+    border-radius: 25px;
+    background-color: #014950;
+}
+
+.form__button--reset {
+    color: #e64a19;
+    border: 3px solid #e64a19;
+}
+
+.form__button--reset:hover {
+    color: white;
+    border: 3px solid #e64a19;
+    border-radius: 15px;
+    background-color: #e64a19;
+}
+
+.form__button--reset:active {
+    position: relative;
+    border: 3px solid #ecfd00;
+    border-radius: 25px;
+    background-color: #a02904;
+}
+
+/* Button Icons */
+.form__button::after {
+    content: "";
+
+    display: none;
+    position: absolute;
+    top: 60%;
+    right: 10px;
+    transform: translateY(-50%);
+    
+    width: 40px;
+    height: 40px;
+
+    background-image: url(./cat.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    border-radius: 50%;
+}
+
+.form__button:active::after {
+    display: inline-block;
+}
+
+
+
