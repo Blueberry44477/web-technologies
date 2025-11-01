@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 500px;
+    padding: 20px;
+
+    background-color: white;
+    border-radius: 25px;
+}
+
+/* Forecast Header */
+.forecast__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    h1 {
+        margin-bottom: 5px;
+
+        font-size: 38px;
+        font-weight: 500;
+        color: #444444;
+    }
+
+    p {
+        color: #6e6e6e;
+        font-weight: 400;
+    }
+} 
+
+/* Forecast Current */
+.forecast__current {
+    display: flex;
+    gap: 100px;
+    margin-bottom: 20px;
+}
+
+.forecast__current-weather {
+    display: inline-flex;
+}
+
+.forecast__current-weather img {
+    width: 80px;
+    height: 80px;
+}
+
+.forecast__current-weather-temp {
+    position: relative;
+    display: inline-block;
+
+    color: #656565;
+    font-size: 32px;
+}
+
+.forecast__current-weather-temp::after {
+    position: absolute;
+    top: 6px;
+    display: inline-block;
+    content: "°C";
+
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+}
+
+/* Details List */
+.forecast__current-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    list-style: none;
+}
+
+.forecast__current-details-item {
+    color: grey;
+    font-weight: 400;
+}
+
+.item--highlight {
+    color: black;
+}
+
+/* Horizontal Line */
+.forecast__horizontal-line {
+    border: none;
+    height: 1px;
+    background-color: grey;
+}
+
+/* Forecast Days */
+.forecast__days {
+    display: flex;
+    flex-direction: column;
+}
+
+.forecast__day {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    p {
+        width: 100px;
+        font-weight: 500;
+    }
+}
+
+.forecast__day img {
+    width: 80px;
+}
+
+.forecast__day-temps {
+    list-style: none;
+    color: grey;
+
+    .forecast__day-max-temp {
+        color: black;
+    }
+}
+
+.forecast__day-additional {
+    color: grey;
+}
+
+
