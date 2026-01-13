@@ -1,0 +1,21 @@
+@use '/src/styles/utils/mixins' as *;
+@use '/src/styles/utils/variables' as *;
+
+.footer {
+    width: 100%;
+    margin-top: 96px;
+    height: 200px;
+    background-image: url('/src/assets/footer.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    inset: 0;
+
+    @include tablet {
+        height: 400px;
+    }
+
+    @include desktop {
+        height: 460px;
+    }
+}

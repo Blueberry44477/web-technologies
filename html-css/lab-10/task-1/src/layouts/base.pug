@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+        block meta
+            meta(charset="utf-8")
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+        block title
+            title Лабораторна робота 10 - Pug, SASS, Vite.
+        block fonts
+        block main-scripts
+        block styles
+            link(rel="stylesheet" href="/src/styles/main.scss")
+    body
+        block data
+        block header
+            include ../components/header/header
+        block main
+        block footer
+            include ../components/footer/footer
+        block add-scripts

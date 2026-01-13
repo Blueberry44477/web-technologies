@@ -1,0 +1,12 @@
+.journal.wrapper(id="journal")
+    .journal__description
+        h2.journal__heading.heading--primary.lines From The Journal
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae sint enim eos inventore tenetur voluptatum, voluptatibus magni quidem sequi, commodi similique?
+    
+    .journal__cards
+        each item in journalItems 
+            a.journal__card(href= item.href)
+                img(src= sourcePath + item.img alt= item.alt)
+                p.journal__card-date-n-theme= item.date_n_theme
+                h3= item.heading
+                p= item.text

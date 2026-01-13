@@ -1,0 +1,10 @@
+nav.header__nav
+    ul.header__nav-list
+        each item in headerNavItems
+            li.header__nav-item.wrapper
+                a(href=item.href)= item.text
+
+        .header__nav-additional.wrapper
+            p#phone-number +1 234 5555-55-55
+
+            a#call Call to order

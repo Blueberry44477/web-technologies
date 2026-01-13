@@ -1,0 +1,9 @@
+.recommended.wrapper(id="recommended")
+    h2 Recommended
+    .recommended__items
+        each item in recommendedItems 
+            a.recommended__item(href= item.href)
+                img(src= sourcePath + item.img, alt= "recommended-item")
+                h3= item.name 
+                p.recommended__item-type= item.type 
+                p.recommended__item-price= item.price

@@ -1,0 +1,8 @@
+@use 'base' as *;
+@use 'utils' as *;
+@use 'layout' as *;
+@use 'components' as *;
+
+*, html, body {
+    color: var(--main-text-color);
+}

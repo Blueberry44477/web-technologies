@@ -1,0 +1,9 @@
+nav.header__nav
+    ul.header__nav-list
+        each item in headerNavItems
+            li.header__nav-item
+                a(href=item.href)= item.text
+                
+        li.header__nav-item-fav
+            a(href="#contact_us")
+                img(src="/src/assets/heart.svg" alt="heart")

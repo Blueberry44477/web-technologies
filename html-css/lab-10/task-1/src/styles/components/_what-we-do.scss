@@ -1,0 +1,103 @@
+@use '/src/styles/utils/mixins' as *;
+
+.what-we-do {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    text-align: center;
+
+    &__top {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 10px;
+        justify-content: center;
+
+        .what-we-do__heading {
+            display: inline;
+            position: relative;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: var(--secondary-text-color);
+        }
+    }
+
+    .what-we-do__cards {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 10px;
+        width: 100%;
+
+        .what-we-do__card {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            gap: 15px;
+            flex: 0 0 100%;
+            
+            max-width: 400px;
+            margin-top: 10px;
+            padding: 20px 0;
+            text-align: center;
+            transition: all 0.2s ease;
+
+            img {
+                width: 150px;
+                height: 150px;
+                display: block;
+                object-fit: cover;
+
+                border-radius: 50%;
+            }
+
+            h3 {
+                text-transform: uppercase;
+                font-size: 1rem;
+            }
+
+            p {
+                color: var(--secondary-text-color);
+                font-size: 0.8rem;
+            }
+
+            &:hover {
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                transform: translateY(-3px);
+            }
+    
+            &:active {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transform: scale(0.98); 
+            }
+        }
+    }
+
+    @include tablet {
+        text-align: left;
+        
+        .what-we-do__top {
+            justify-content: flex-start;
+        }
+
+        .what-we-do__cards {
+            .what-we-do__card:not(:last-child) {
+                border: none;
+            }
+
+            .what-we-do__card {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+    }
+
+    @include laptop {
+        .what-we-do__cards .what-we-do__card { flex: 0 0 calc(33.333% - 10px); }
+    }
+
+    @include desktop {
+        .what-we-do__cards .what-we-do__card { flex: 0 0 calc(25% - 10px); }
+    }
+}

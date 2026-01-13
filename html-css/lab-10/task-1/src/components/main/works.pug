@@ -1,0 +1,10 @@
+.works.wrapper(id="our_works")
+    .works__top
+        h2.works__heading.heading--primary.lines Our Awesome Works
+        button.button--primary Filter Portfolio
+
+    .works__gallery-wrapper
+        each item in worksGalleryItems
+            a.works__gallery-item(href= item.href)
+                img(src= sourcePath + item.img alt= item.alt)
+

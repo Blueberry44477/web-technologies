@@ -1,0 +1,46 @@
+@use '/src/styles/utils/mixins' as *;
+
+.about {
+    $block-name: &;
+
+    display: flex;
+    width: 100%;
+    padding: 50px 0;
+    background-color: #f0f4f5;
+    margin-top: 30px;
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 0 auto;
+
+        h1 {
+            text-transform: uppercase;
+            color: var(--main-text-color);
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-weight: 200;
+            font-size: 0.8rem;
+        }
+    }
+
+
+    @include desktop {
+        padding: 70px 0;
+        &__text {
+            width: 1140px;
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+}

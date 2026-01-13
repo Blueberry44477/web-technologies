@@ -1,0 +1,12 @@
+.contact {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+    margin: 100px 0 100px 0;
+
+    &__heading {
+        font-size: 1.5rem;
+    }
+}

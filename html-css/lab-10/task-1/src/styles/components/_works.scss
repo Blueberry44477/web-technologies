@@ -1,0 +1,70 @@
+@use '/src/styles/utils/mixins' as *;
+
+.works {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+
+    .works__heading {
+        position: relative;
+    }
+
+    .works__top {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        margin-top: 50px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+
+        font-size: 1rem;
+    }
+
+    .works__gallery-wrapper {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 15px;
+        
+        .works__gallery-item {
+            flex: 0 0 100%;
+            transition: all 0.3 ease;
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.4s ease, filter 0.3s ease;
+            }
+
+            &:hover {
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+                transform: scale(1.01);
+            }
+    
+            &:active {
+                transform: scale(0.98);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+            }
+    
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px var(--main-color);
+            }
+        }
+    }
+
+    @include tablet {
+        .works__top { flex-flow: row nowrap; }
+
+        .works__gallery-wrapper .works__gallery-item { flex: 0 0 calc(50% - 10px); }
+    }
+
+    @include laptop {
+        .works__gallery-wrapper .works__gallery-item { flex: 0 0 calc(33.333% - 10px); }
+    }
+}

@@ -1,0 +1,82 @@
+@use '/src/styles/utils/mixins' as *;
+@use '/src/styles/utils/variables' as *;
+
+.contact {
+    @include flex-column($gap: 16px);
+    margin-top: 96px;
+    width: 100%;
+
+    h2 {
+        @include text-style($size: 32px, $weight: bold, $spacing: -1.5px);
+    }
+
+    &__form {
+        @include flex-column($gap: 16px);
+    }
+
+    &__wrapper {
+        width: 100%;
+        @include flex-row($gap: 48px, $wrap: wrap);
+    }
+
+    &__form,
+    &__credentials {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    &__input,
+    &__area {
+        font-size: 14px;
+        width: 100%;
+        border: none;
+        padding: 14px;
+        border-radius: 30px;
+        background-color: #f8f8f8;
+
+        &:hover {
+            border: 1px solid grey;
+        }
+
+        &:active {
+            border: 1px solid black;
+        }
+    }
+
+    &__area {
+        height: 150px;
+    }
+
+    &__credentials {
+        @include flex-column($gap: 20px, $align: flex-start);
+    }
+
+    &__pair {
+        @include flex-column($gap: 8px, $align: flex-start);
+    }
+
+    &__label {
+        @include text-style($size: 14px);
+        color: grey;
+    }
+
+    &__content {
+        font-size: 16px;
+    }
+
+    @include tablet {
+        &__wrapper {
+            @include flex-row(24px, $align: flex-start);
+        }
+
+        &__form,
+        &__credentials {
+            flex: 1;
+            width: 50%;
+        }
+    }
+}

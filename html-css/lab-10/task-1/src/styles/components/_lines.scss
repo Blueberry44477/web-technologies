@@ -1,0 +1,32 @@
+@use '/src/styles/utils/mixins' as *;
+
+.lines {
+    &::after,
+    &::before {
+        position: absolute;
+        content: "--";
+        color: var(--main-color);
+    }
+    
+    &::after {
+        right: -20px;
+    }
+    
+    &::before {
+        left: -20px;
+    }
+
+    @include tablet {
+        &::before {
+            display: none;
+        }
+
+        &::after {
+            right: -30px;
+        }
+    }
+
+    @include laptop {
+        &::after { right: -40px; }
+    }
+}

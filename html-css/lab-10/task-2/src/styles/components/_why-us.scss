@@ -1,0 +1,40 @@
+@use '/src/styles/utils/mixins' as *;
+@use '/src/styles/utils/variables' as *;
+
+.why-us {
+    @include flex-column($gap: 32px);
+
+    margin-top: 96px;
+
+    &__details {
+        @include flex-column($gap: 40px, $align: flex-start);
+    }
+
+    &__heading {
+        @include text-style($size: 32px, $weight: bold, $spacing: -1.5px)
+    }
+
+    &__offers {
+        @include flex-column($gap: 32px, $align: flex-start);
+    }
+
+    &__offer {
+        font-weight: bold;
+    }
+
+    &__explanation {
+        line-height: 1.75;
+    }
+
+    @include tablet {
+        @include flex-row($gap: 24px, $align: flex-start);
+        &__heading {
+            font-size: 40px;
+        }
+
+        &__heading,
+        &__details {
+            flex: 0 0 50%;
+        }
+    }
+}

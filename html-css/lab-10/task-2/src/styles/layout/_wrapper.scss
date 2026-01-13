@@ -1,0 +1,17 @@
+@use '/src/styles/utils/mixins' as *;
+
+.wrapper {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+
+    // 744px+
+    @include tablet  { 
+        max-width: 600px;
+    }
+
+    // 1260px+
+    @include desktop { 
+        max-width: 1020px;
+    }
+}

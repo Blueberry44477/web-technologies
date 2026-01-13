@@ -1,0 +1,16 @@
+.contact.wrapper
+    h2.contact__heading Contact Us
+    .contact__wrapper
+        form.contact__form(action="" method="")
+            input.contact__input(type="text" id="name" placeholder="Name")
+            input.contact__input(type="email" id="email" placeholder="Email")
+            textarea.contact__area(type="text" id="message" placeholder="Message")
+            button.button(type="submit") Send
+        
+        .contact__credentials 
+            each item in credentials
+                .contact__pair
+                    h3.contact__label= item.label 
+                    p.contact__content= item.content
+
+    

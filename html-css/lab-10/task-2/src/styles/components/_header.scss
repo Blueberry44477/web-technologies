@@ -1,0 +1,181 @@
+@use '/src/styles/utils/mixins' as *;
+
+.header {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+
+    @include flex-row($justify: space-between);
+
+    padding: 24px 0;
+
+    z-index: 10;
+    background-color: transparent;
+
+    &__logo {
+        height: 16px;
+        width: 125px;
+    }
+
+    &__right {
+        @include flex-row($gap: 24px);
+    }
+
+    &__contact img {
+        width: 18px;
+        height: 18px;
+    }
+
+    // Burger------------------------------------
+    
+    &__burger-icon { 
+        display: inline-block;
+        position: relative; 
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        &,
+        &::before,
+        &::after {
+            width: 18px;
+            height: 2px;
+            background-color: var(--main-text-color);
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        &::before { top: -5px; }
+        &::after { top: 5px; }
+    }
+
+    &__burger-toggle {
+        display: none;
+
+        &:checked {
+            ~ .header__nav {
+                display: block;
+            }
+
+            + .header__burger-icon {
+                background: transparent;
+
+                &::before {
+                    transform: rotate(45deg) translate(4px, 3px);
+                }
+
+                &::after {
+                    transform: rotate(-45deg) translate(4px, -3px);
+                }
+            }
+        }
+    }
+    
+    &__nav {
+        position: absolute;
+        display: none;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+
+        background-color: #E8EFF9;
+        border-radius: 0 0 10px 10px;
+        transition: all 0.2s ease;
+    }
+    
+    &__nav-list {
+        @include flex-column($gap: 2px, $align: flex-start);
+        width: 100%;
+        margin-top: 20px;
+        list-style: none;
+    }
+
+    &__nav-item {
+        a {
+            @include flex-row($align: center);
+            padding: 20px 0;
+            border-radius: 20px;
+
+            color: #333;
+            @include text-style($size: 22px, $weight: 700, 
+                                $transform: uppercase, $spacing: 2px)
+        }
+
+    }
+
+    &__nav-additional.wrapper {
+        @include flex-column($gap: 16px, $align: flex-start);
+        margin-top: 40px;
+
+        p {
+            @include text-style($size: 16px, $weight: 700);
+        }
+
+        a {
+            position: relative;
+            @include text-style($size: 12px, $weight: 700, $spacing: 2px, $transform: uppercase);
+            text-decoration: none;
+
+            &::after {
+                position: absolute;
+                bottom: -10px;
+
+                display: block;
+                width: 100%;
+                height: 1px;
+                content: "";
+                background-color: var(--main-text-color);
+            }
+        }
+        
+    }
+
+    @include tablet {
+        &__right {
+            gap: 36px;
+        }
+
+        &__logo {
+            height: 24px;
+            width: 190px;
+        }
+
+        &__contact img {
+            width: 24px;
+            height: 24px;
+        }
+
+        &__burger-icon {
+            &,
+            &::before,
+            &::after {
+                width: 24px;
+                height: 2px;
+            }
+            
+            &::before { top: -6px; }
+            &::after { top: 6px; }
+        }
+
+        &__burger-toggle {
+            &:checked {
+                + .header__burger-icon {
+                    &::before {
+                        transform: rotate(45deg) translate(4px, 5px);
+                    }
+
+                    &::after {
+                        transform: rotate(-45deg) translate(4px, -5px);
+                    }
+                }
+            }
+        }   
+    }
+}

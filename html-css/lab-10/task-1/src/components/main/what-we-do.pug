@@ -1,0 +1,12 @@
+.what-we-do.wrapper(id="what_do_we_do")
+    .what-we-do__top
+        h2.what-we-do__heading.heading--primary.lines What Do We Do
+        p Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptatibus quae ullam, harum eos odio id quaerat nesciunt impedit dolore vitae doloribus, molestiae voluptatem? 
+    
+    .what-we-do__cards 
+        each item in whatWeDoItems
+            .what-we-do__card
+                img(src= sourcePath + item.img alt= item.alt)
+                h3.what-we-do__card-image= item.heading
+                p= item.paragraph
+

@@ -1,0 +1,16 @@
+*, html, body {
+    font-family: "Inter", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

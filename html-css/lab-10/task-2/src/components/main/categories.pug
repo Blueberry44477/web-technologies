@@ -1,0 +1,11 @@
+section.categories.wrapper(id="categories")
+    h2.categories__title Browse Bose products by category
+    .categories__items
+        each item in categoriesItems 
+            a.categories__item
+                .categories__item-images
+                    img.categories__image.categories__image--wide(src= sourcePath + item.wide_img, alt= "category-img")
+                    img.categories__image.categories__image--narrow(src= sourcePath + item.narrow_img, alt= "category-img")
+                h3= item.category
+
+    a.button(href="#") View All

@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    block head
+        include ../includes/head
+        //- Приклади нижче не працюють навіть зі вказанням pug({root: './src'}),
+        //- include /components/includes/head 
+        //- include /src/components/includes/head
+        
+    body
+        block data
+        block header
+            include ../components/header/header
+        block main
+        block footer
+            include ../components/footer/footer
+        block add-scripts
