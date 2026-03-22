@@ -138,6 +138,170 @@ console.log(thirdDegreeStudent);
 // Task 5. //
 /////////////
 
+// 1.
+const numbers = [];
+for (let i = 1; i <= 10; i++) {
+    numbers.push(i);
+}
+console.log(numbers);
 
+const squaredNumbers = numbers.map(number => number ** 2);
+console.log(squaredNumbers);
 
+// 2. 
+const evenNumbers = numbers.filter(number => number % 2 === 0);
+console.log("5.2 - Even numbers: " + evenNumbers);
 
+// 3.
+const sum = numbers.reduce((a, b) => a + b);
+console.log(`5.3 - Numbers sum: ${sum}`);
+
+// 4.
+const additionalNumbers = [20, 30, 40];
+const concatenatedNumbers = numbers.concat(additionalNumbers);
+
+console.log(`5.4 
+numbers: ${numbers}
+additionalNumbers: ${additionalNumbers}
+numbers.concat(additionalNumbers): ${concatenatedNumbers}
+`);
+
+// 5.
+numbers.splice(0, 3);
+console.log(`5.4 - Numbers: ${numbers}`);
+
+/////////////
+// Task 6. //
+/////////////
+class Book {
+    #title = "";
+    #author = "";
+    #genre = "";
+    #pages = 0;
+    #isAvailable = true;
+
+    constructor(title, author, genre, pages, isAvailable) {
+        this.#title = title;
+        this.#author = author;
+        this.#genre = genre;
+        this.#pages = pages;
+        this.#isAvailable = isAvailable;
+    }
+
+    get title() { return this.#title; }
+    get author() { return this.#author; }
+    get genre() { return this.#genre; }
+    get pages() { return this.#pages; }
+    get isAvailable() { return this.#isAvailable; }
+
+    set isAvailable(status) {
+        if (typeof status === "boolean") {
+            this.#isAvailable = status;
+        }
+    }
+
+    getInfo() {
+        return `"${this.#title}" - ${this.#author} (${this.#pages} ст.)`;
+    }
+};
+
+class Library {
+    #books = []
+
+    constructor(books = []) {
+        this.#books = books;
+    }
+
+    get books() { return [...this.#books]; }
+
+    add(book) {
+        this.#books.push(book);
+    }
+
+    remove(title) {
+        this.#books = this.#books.filter(book => book.title !== title);
+    }
+
+}
+
+class LibraryManager {
+    #library;
+    constructor(library) {
+        this.#library = library;
+    }
+
+    addBook(title, author, genre, pages) {
+        const existingBooks = this.#library.books;
+        const isDuplicate = existingBooks.some(b => b.title === title);
+        
+        if (isDuplicate)
+            throw new Error(`Book "${title}" already exists.`);
+
+        this.#library.add(new Book(title, author, genre, pages));
+    }
+
+    removeBook(title) {
+        const bookExists = this.#library.books.some(book => book.title === title);
+        if (!bookExists)
+            throw new Error(`Book ${title} does not exist.`);
+
+        this.#library.remove(title);
+    }
+
+    findBooksByAuthor(author) {
+        const allBooks = this.#library.books;
+
+        return allBooks.filter(book => 
+            book.author.toLowerCase() === author.toLowerCase().trim()
+        );
+    }
+
+    toggleBookAvailability(title, isBorrowed) {
+        const book = this.#library.books.find(
+            b => b.title.toLowerCase() === title.toLowerCase().trim()
+        );
+
+        if (!book)
+            throw new Error(`Book "${title}" is not found.`);
+
+        book.isAvailable = !isBorrowed;
+    }
+
+    sortBooksByPages() {
+        return this.#library.books.toSorted((a, b) => a.pages - b.pages);
+    }
+
+    getBooksStatistics() {
+        const allBooks = this.#library.books;
+        const total = allBooks.length;
+
+        if (total === 0) 
+            throw new Error("No books available.");
+
+        const available = allBooks.filter(book => book.isAvailable).length;
+        const borrowed = total - available;
+        const totalPages = allBooks.reduce((sum, book) => sum + book.pages, 0);
+        const average = Math.round(totalPages / total);
+
+        return {
+            totalBooks: total,
+            availableBooks: available,
+            borrowedBooks: borrowed,
+            averagePages: average
+        };
+    }
+}
+
+/////////////
+// Task 7. //
+/////////////
+
+let student = {
+    name: "John",
+    age: 20,
+    course: 2
+};
+
+student.lessons = ["Math", "Philosophy"];
+delete student["age"];
+console.log(student);
