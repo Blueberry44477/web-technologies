@@ -1,0 +1,41 @@
+.tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.tasks__task {
+  margin: 0;
+}
+
+.tasks__task a {
+  display: block;
+  padding: 16px 24px;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  text-decoration: none;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease; /* Плавний перехід для анімацій */
+}
+
+.tasks__task a:hover {
+  background-color: #3498db;
+  color: #ffffff;
+  border-color: #3498db;
+  transform: translateY(-3px); /* Злегка піднімаємо картку вгору */
+  box-shadow: 0 6px 12px rgba(52, 152, 219, 0.2); /* Додаємо тінь */
+}
+
+.tasks__task a:active {
+  transform: translateY(0);    /* Повертаємо на місце при кліку */
+  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+}

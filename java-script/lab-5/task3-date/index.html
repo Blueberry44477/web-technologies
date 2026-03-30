@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3 - Date</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Current TIme</h2>
+            <div class="clock" id="digital-clock">
+                <span id="hours">00</span><span class="blink">:</span><span id="minutes">00</span><span class="blink">:</span><span id="seconds">00</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Timer</h2>
+            <div class="controls">
+                <input type="datetime-local" id="timer-input">
+                <button id="btn-start-timer">Run</button>
+            </div>
+            <div class="display-text" id="timer-display">Choose time</div>
+        </div>
+
+        <div class="card">
+            <h2>Birthday?</h2>
+            <p class="subtitle">Choose Date:</p>
+            <div class="controls">
+                <input type="date" id="bday-input">
+            </div>
+            <div class="display-text highlight" id="bday-display">Waiting for date</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
