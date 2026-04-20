@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список завдань</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="todo-app">
+        <header class="todo-app__header">
+            <h1 class="todo-app__title">Список завдань</h1>
+        </header>
+
+        <form class="todo-form" id="todo-form">
+            <input type="text" class="todo-form__input" id="todo-input"
+                   placeholder="Введіть нове завдання..." required minlength="2">
+            <button type="submit" class="todo-form__submit">Додати</button>
+        </form>
+
+        <section class="todo-controls">
+            <label for="sort-select" class="todo-controls__label">Сортувати за:</label>
+            <select id="sort-select" class="todo-controls__select">
+                <option value="date-desc">Датою додавання (новіші)</option>
+                <option value="date-asc">Датою додавання (старіші)</option>
+                <option value="completed">Станом виконання</option>
+                <option value="updated">Датою оновлення</option>
+            </select>
+        </section>
+
+        <ul class="todo-list" id="todo-list"></ul>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
