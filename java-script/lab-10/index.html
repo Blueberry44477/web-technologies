@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth - Lab 10</title>
+  <link rel="stylesheet" href="src/css/auth.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button type="button" class="tab-btn active" data-target="signup-form">Signup</button>
+            <button type="button" class="tab-btn" data-target="login-form">Login</button>
+        </div>
+
+        <form id="signup-form" class="form-container" novalidate>
+            <h2>Create an account</h2>
+
+            <div class="form-group">
+                <label>First Name
+                    <input type="text" id="reg-firstname" name="firstname"
+                           placeholder="Enter first name" value="Taras" tabindex="1">
+                </label>
+                <div class="error-msg">Must be between 3 and 15 characters.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name
+                    <input type="text" id="reg-lastname" name="lastname" 
+                        placeholder="Enter last name" value="Shevchenko" tabindex="2">
+                </label>
+                <div class="error-msg">Must be between 3 and 15 characters.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Email
+                    <input type="email" id="reg-email" name="email" 
+                           placeholder="Enter email" value="blueberry@gmail.com"
+                           tabindex="3">
+                </label>
+                <div class="error-msg">Please provide a valid email.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="password-wrapper">Password
+                    <input type="password" id="reg-password" name="password" 
+                           placeholder="Enter password" value="12345678910"
+                           tabindex="4">
+                    <span class="toggle-password"><img src="src/assets/visibility.svg" alt="toggle"></span>
+                </label>
+                <div class="error-msg">Must be at least 6 characters.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="password-wrapper">Confirm Password
+                    <input type="password" id="reg-confirm" name="confirm" 
+                           placeholder="Confirm password" value="12345678910"
+                           tabindex="5">
+                    <span class="toggle-password"><img src="src/assets/visibility.svg" alt="toggle"></span>
+                </label>
+                <div class="error-msg">Passwords must match.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Phone
+                    <input type="text" id="reg-phone" name="phone" 
+                           placeholder="+380XXXXXXXXX" value="+380123456789" tabindex="6">
+                </label>
+                <div class="error-msg">Format must be +380 followed by 9 digits.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth
+                    <input type="date" id="reg-dob" name="dob" tabindex="7">
+                </label>
+                <div class="error-msg">You must be at least 12 years old and date cannot be in the future.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Sex
+                    <label><input type="radio" name="sex" value="MALE"> Male</label>
+                    <label><input type="radio" name="sex" value="FEMALE"> Female</label>
+                </label>
+                <div class="error-msg" id="sex-error">Please select your sex.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Country
+                    <select id="reg-country" name="country">
+                        <option value="">Select Country</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                    </select>
+                </label>
+                <div class="error-msg">Please select a country.</div>
+            </div>
+
+            <div class="form-group">
+                <label>City
+                    <select id="reg-city" name="city" disabled>
+                        <option value="">Select City</option>
+                    </select>
+                </label>
+                <div class="error-msg">Please select a city.</div>
+            </div>
+
+            <button type="submit" class="submit-btn">Signup</button>
+        </form>
+
+        <form id="login-form" class="form-container active" novalidate>
+            <h2>Login</h2>
+
+            <div class="form-group">
+                <label>Email
+                    <input type="text" id="login-email" name="email" placeholder="Enter email"
+                           value="blueberry3@gmail.com">
+                </label>
+                <div class="error-msg">Please choose an email.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="password-wrapper">
+                    <span>Password</span>
+                    <input type="password" id="login-password" name="password" placeholder="Enter password"
+                        value="12345678910">
+                    <span class="toggle-password"><img src="src/assets/visibility.svg" alt="toggle"></span>
+                </label>
+                <div class="error-msg">Must be at least 6 characters.</div>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label for="login-remember">
+                    <input type="checkbox" id="login-remember" name="remember">
+                    Remember Me
+                </label>
+            </div>
+
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <div id="snackbar">Success!</div>
+    </div>
+
+    <script type="module" src="/src/js/auth.js"></script>
+</body>
+</html>

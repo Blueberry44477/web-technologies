@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App - Lab 10</title>
+    <link rel="stylesheet" href="./src/css/app.css">
+</head>
+
+<body>
+    <header class="wrapper header">
+        <div class="header__logo">
+            <img src="./src/assets/flowers.png" alt="logo" class="header__logo-img">
+        </div>
+
+        <input type="checkbox" id="burger-toggle" class="header__burger-toggle">
+        <label for="burger-toggle" class="header__burger-icon">
+            <span></span>
+        </label>
+
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li class="header__nav-item">
+                    <button type="button" class="header__nav-btn" data-target="browse-section">Browse People</button>
+                </li>
+                <li class="header__nav-item">
+                    <button type="button" class="header__nav-btn" data-target="friends-section">Friends</button>
+                </li>
+                <li class="header__nav-item">
+                    <button type="button" class="header__nav-btn" id="logout-btn">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+
+    </main>
+    <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>
