@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="./src/css/app.css">
 </head>
 
-<body>
-    <header class="wrapper header">
+<body class="wrapper">
+    <header class="header">
         <div class="header__logo">
             <img src="./src/assets/flowers.png" alt="logo" class="header__logo-img">
         </div>
@@ -24,7 +24,7 @@
                     <button type="button" class="header__nav-btn" data-target="browse-section">Browse People</button>
                 </li>
                 <li class="header__nav-item">
-                    <button type="button" class="header__nav-btn" data-target="friends-section">Friends</button>
+                    <button type="button" class="header__nav-btn" data-target="friends-section" id="friends-btn">Friends</button>
                 </li>
                 <li class="header__nav-item">
                     <button type="button" class="header__nav-btn" id="logout-btn">Logout</button>
@@ -34,8 +34,23 @@
     </header>
 
     <main class="main">
+        <section class="friends">
+            <h2>Your Friends</h2>
+            <div class="friends__filters">
+                <input type="text" id="friendsSearchInput" class="friends__search"
+                       placeholder="Search">
 
+                <select id="friendsSortSelect" class="friends__sort-order">
+                    <option value="">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="age">Age</option>
+                </select>
+
+            </div>
+            <div id="friends-container" class="friends__list"></div>
+        </section>
     </main>
+
     <script type="module" src="/src/js/app.js"></script>
 </body>
 </html>

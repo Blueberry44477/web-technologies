@@ -250,13 +250,12 @@ async function handleLogin(event) {
         const token = await response.text();
         localStorage.setItem('token', token);
 
-        showSnackbar("Login successful!");
-        resetFormVisuals(form);
-
         if (isAuthenticated()) {
+            showSnackbar("Login successful!");
+            resetFormVisuals(form);
             setTimeout(() => {
                 window.location.replace('/app.html');
-            }, 3000)
+            }, 1500)
         }
     } catch(error) {
         showSnackbar(error.message);
