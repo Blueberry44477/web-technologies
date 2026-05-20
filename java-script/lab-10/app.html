@@ -34,7 +34,12 @@
     </header>
 
     <main class="main">
-        <section class="friends">
+        <section id="browse-section" class="users">
+            <h2>All Users</h2>
+            <div id="users-container" class="users__list"></div>
+        </section>
+
+        <section id="friends-section" class="friends hidden">
             <h2>Your Friends</h2>
             <div class="friends__filters">
                 <input type="text" id="friendsSearchInput" class="friends__search"

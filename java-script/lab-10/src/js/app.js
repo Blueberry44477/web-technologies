@@ -1,3 +1,5 @@
+import { initRouter, navigateTo } from "./router";
+
 import { 
     getToken,
     isAuthenticated,
@@ -6,45 +8,100 @@ import {
 
 import defaultAvatarUrl from "../assets/default-avatar.png";
 
+if (!isAuthenticated()) {
+    window.location.href = "/index.html";
+}
+
+window.loadFriends = loadFriends;
+window.loadUsers = loadUsers;
+
 const API_URL = "http://localhost:8080/api/v1/secured"
 
+let users = [];
 let friends = [];
+
 
 function logout() {
     removeToken();
     window.location.href = "/index.html";
 }
 
-const DOM = {
-    friendsBtn: document.getElementById("friends-btn"),
-    logoutBtn: document.getElementById("logout-btn"),
+const DOM = {};
 
-    friendsContainer: document.getElementById("friends-container"),
-    friendsSearchInput: document.getElementById("friendsSearchInput"),
-    friendsSortSelect: document.getElementById("friendsSortSelect")
-}
-
-async function loadFriends(page = 0, size = 10) {
+async function getPageRequest(url, page = 0, size = 10) {
     const token = getToken();
     try {
-        const response = await fetch(`${API_URL}/friends?page=${page}&size=${size}`,{
+        const response = await fetch(`${API_URL}${url}?page=${page}&size=${size}`,{
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         });
-
+    
         if (!response.ok) {
             throw new Error(response.status);
         }
+    
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to fetch data:", error);
+        throw error;
+    }
+}
 
-        const pageData = await response.json();
+async function loadUsers(page = 0, size = 10) {
+    try {
+        const pageData = await getPageRequest("/users", page, size);
+        users = pageData.content || [];
+        renderUsers(users);
+    } catch (error) {
+        console.error("Failed to load friends:", error);
+        DOM.friendsContainer.innerHTML = 
+            `<p class="error-text">Failed to load users list.</p>`;
+    }
+}
+
+function renderUsers(usersList) {
+    const usersContainer = DOM.usersContainer;
+    usersContainer.innerHTML = "";
+
+    if (!usersList || usersList.length === 0) {
+        usersContainer.innerHTML = `<p class="empty-text">No users to display.</p>`;
+        return;
+    }
+
+    usersList.forEach(user => {
+        const avatarSrc = user.avatar ? `data:image/jpeg;base64,${user.avatar}` : defaultAvatarUrl;
+        const age = user.dob ? new Date().getFullYear() - new Date(user.dob).getFullYear() : 'N/A';
+        
+        const userCard = document.createElement("div");
+        userCard.classList.add("users__card");
+        userCard.innerHTML = `
+            <div class = "users__card-img-wrapper">
+                <img src="${avatarSrc}" alt="avatar" class="users__card-img">
+            </div>
+            <div class="users__card-info">
+                <h3 class="users__card-name">${user.firstName} ${user.lastName}</h3>
+                <p class="users__card-age">Age: ${age}</p>
+                <p class="users__card-email">${user.email}</p>
+                <p class="users__card-phone">${user.phone}</p>
+                <p class="users__card-location">${user.city ? user.city + ', ' : ''}${user.country}</p>
+                <p class="users__card-sex">${user.sex}</p>
+            </div>
+        `;
+        usersContainer.appendChild(userCard);
+    })
+}
+
+async function loadFriends(page = 0, size = 10) {
+    try {
+        const pageData = await getPageRequest("/friends", page, size);
         friends = pageData.content || [];
         renderFriends(friends);
     } catch (error) {
         console.error("Failed to load friends:", error);
-        document.getElementById("friends-container").innerHTML = 
+        DOM.friendsContainer.innerHTML = 
             `<p class="error-text">Failed to load friends list.</p>`;
     }
 }
@@ -127,7 +184,20 @@ function updateFriendsUI() {
     renderFriends(sortedAndFiltered);
 }
 
-DOM.friendsBtn.addEventListener("click", () => loadFriends(0, 10));
-DOM.logoutBtn.addEventListener("click", logout);
-DOM.friendsSearchInput.addEventListener("input", updateFriendsUI);
-DOM.friendsSortSelect.addEventListener("change", updateFriendsUI);
+document.addEventListener("DOMContentLoaded", () => {
+    // Elements
+    DOM.logoutBtn = document.getElementById("logout-btn");
+
+    DOM.usersContainer = document.getElementById("users-container");
+    
+    DOM.friendsContainer = document.getElementById("friends-container");
+    DOM.friendsSearchInput = document.getElementById("friendsSearchInput");
+    DOM.friendsSortSelect = document.getElementById("friendsSortSelect");
+
+    // Event Listeners
+    DOM.logoutBtn.addEventListener("click", logout);
+    DOM.friendsSearchInput.addEventListener("input", updateFriendsUI);
+    DOM.friendsSortSelect.addEventListener("change", updateFriendsUI);
+
+    initRouter();
+});
