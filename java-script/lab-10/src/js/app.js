@@ -12,14 +12,25 @@ if (!isAuthenticated()) {
     window.location.href = "/index.html";
 }
 
+const STATE = {
+    users: {
+        data: [],
+        page: 0,
+        size: 3,
+        totalPages: 0
+    },
+    friends: {
+        data: [],
+        page: 0,
+        size: 8,
+        totalPages: 0
+    }
+}
+
 window.loadFriends = loadFriends;
 window.loadUsers = loadUsers;
 
 const API_URL = "http://localhost:8080/api/v1/secured"
-
-let users = [];
-let friends = [];
-
 
 function logout() {
     removeToken();
@@ -46,25 +57,27 @@ async function getPageRequest(url, page = 0, size = 10) {
         return await response.json();
     } catch (error) {
         console.error("Failed to fetch data:", error);
-        throw error;
     }
 }
 
-async function loadUsers(page = 0, size = 10) {
+async function loadUsers() {
     try {
-        const pageData = await getPageRequest("/users", page, size);
-        users = pageData.content || [];
-        renderUsers(users);
+        const pageData = await getPageRequest("/users", STATE.users.page, STATE.users.size);
+        STATE.users.data = pageData.content || [];
+        STATE.users.totalPages = pageData.page.totalPages || 0;
+        renderUsers(STATE.users.data);
     } catch (error) {
         console.error("Failed to load friends:", error);
         DOM.friendsContainer.innerHTML = 
-            `<p class="error-text">Failed to load users list.</p>`;
+            `<p class="error-text">No users to display.</p>`;
     }
 }
 
 function renderUsers(usersList) {
-    const usersContainer = DOM.usersContainer;
-    usersContainer.innerHTML = "";
+    if (!DOM.usersContainer) 
+        return;
+
+    DOM.usersContainer.innerHTML = ""
 
     if (!usersList || usersList.length === 0) {
         usersContainer.innerHTML = `<p class="empty-text">No users to display.</p>`;
@@ -90,25 +103,40 @@ function renderUsers(usersList) {
                 <p class="users__card-sex">${user.sex}</p>
             </div>
         `;
-        usersContainer.appendChild(userCard);
-    })
+        DOM.usersContainer.appendChild(userCard);
+    });
+
+    DOM.usersPaginationControls.classList.remove("hidden");
+
+    DOM.usersPreviousPageBtn.disabled = STATE.users.page === 0;
+    DOM.usersNextPageBtn.disabled = STATE.users.page >= STATE.users.totalPages - 1;
+    DOM.usersCurrentPage.textContent = `Page ${STATE.users.page + 1} of ${STATE.users.totalPages || 1}`;
 }
 
-async function loadFriends(page = 0, size = 10) {
+async function loadFriends() {
     try {
-        const pageData = await getPageRequest("/friends", page, size);
-        friends = pageData.content || [];
-        renderFriends(friends);
+        const pageData = await getPageRequest("/friends", STATE.friends.page, STATE.friends.size);
+        
+        if (pageData.content.length === 0)
+            throw new Error("You have zero friends.");
+
+        console.log(pageData);
+        STATE.friends.data = pageData.content || [];
+        STATE.friends.totalPages = pageData.page.totalPages || 0;
+
+        updateFriendsUI();
     } catch (error) {
-        console.error("Failed to load friends:", error);
+        // console.error("Failed to load friends:", error);
         DOM.friendsContainer.innerHTML = 
-            `<p class="error-text">Failed to load friends list.</p>`;
+            `<p class="error-text">${error.message}</p>`;
     }
 }
 
 function renderFriends(friendsList) {
-    const friendsContainer = DOM.friendsContainer;
-    friendsContainer.innerHTML = "";
+    if (!DOM.friendsContainer)
+        return;
+
+    DOM.friendsContainer.innerHTML = "";
 
     if (!friendsList || friendsList.length === 0) {
         friendsContainer.innerHTML = `<p class="empty-text">No friends to display.</p>`;
@@ -134,8 +162,8 @@ function renderFriends(friendsList) {
                 <p class="friends__card-sex">${friend.sex}</p>
             </div>
         `;
-        friendsContainer.appendChild(friendCard);
-    })
+        DOM.friendsContainer.appendChild(friendCard);
+    });
 }
 
 // By name or email.
@@ -178,14 +206,20 @@ function updateFriendsUI() {
     const query = DOM.friendsSearchInput.value;
     const sortOrder = DOM.friendsSortSelect.value;
 
-    const filtered = filterFriends(friends, query);
+    const filtered = filterFriends(STATE.friends.data, query);
     const sortedAndFiltered = sortFriends(filtered, sortOrder);
 
     renderFriends(sortedAndFiltered);
+
+    DOM.friendsPaginationControls.classList.remove("hidden");
+    DOM.friendsPreviousPageBtn.disabled = STATE.friends.page === 0;
+    DOM.friendsNextPageBtn.disabled = STATE.friends.page >= STATE.friends.totalPages - 1;
+    DOM.friendsCurrentPage.textContent = `Page ${STATE.friends.page + 1} of ${STATE.friends.totalPages || 1}`;
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Elements
+    // Elements.
     DOM.logoutBtn = document.getElementById("logout-btn");
 
     DOM.usersContainer = document.getElementById("users-container");
@@ -194,10 +228,42 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.friendsSearchInput = document.getElementById("friendsSearchInput");
     DOM.friendsSortSelect = document.getElementById("friendsSortSelect");
 
-    // Event Listeners
+    // Friends pagination controls.
+    DOM.friendsPaginationControls = document.getElementById("friends-pagination-controls");
+    DOM.friendsPreviousPageBtn = document.getElementById("friends-previous");
+    DOM.friendsCurrentPage = document.getElementById("friends-page");
+    DOM.friendsNextPageBtn = document.getElementById("friends-next");
+
+    // Users pagination controls.
+    DOM.usersPaginationControls = document.getElementById("users-pagination-controls");
+    DOM.usersPreviousPageBtn = document.getElementById("users-previous");
+    DOM.usersCurrentPage = document.getElementById("users-page");
+    DOM.usersNextPageBtn = document.getElementById("users-next");
+
+    // Event Listeners --------------------------------------------------------
     DOM.logoutBtn.addEventListener("click", logout);
     DOM.friendsSearchInput.addEventListener("input", updateFriendsUI);
     DOM.friendsSortSelect.addEventListener("change", updateFriendsUI);
+
+    DOM.friendsPreviousPageBtn.addEventListener("click", () => {
+        STATE.friends.page--;
+        loadFriends();
+    });
+
+    DOM.friendsNextPageBtn.addEventListener("click", () => {
+        STATE.friends.page++;
+        loadFriends();
+    });
+
+    DOM.usersPreviousPageBtn.addEventListener("click", () => {
+        STATE.users.page--;
+        loadUsers();
+    });
+
+    DOM.usersNextPageBtn.addEventListener("click", () => {
+        STATE.users.page++;
+        loadUsers();
+    });
 
     initRouter();
 });

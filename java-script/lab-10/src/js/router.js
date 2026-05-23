@@ -58,14 +58,11 @@ function handleRouting(path) {
 function triggerSectionLoad(sectionId) {
     switch (sectionId) {
         case "browse-section":
-            if (typeof window.loadUsers === "function") {
-                window.loadUsers(0, 10);
-            }
+            window.loadUsers(0, 10);
+            break;
 
         case "friends-section":
-            if (typeof window.loadFriends === "function") {
-                window.loadFriends(0, 10);
-            }
+            window.loadFriends(0, 10);
             break;
     }
 }
