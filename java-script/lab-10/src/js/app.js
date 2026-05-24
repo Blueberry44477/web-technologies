@@ -41,7 +41,18 @@ function logout() {
     window.location.href = "/index.html";
 }
 
-const DOM = {};
+async function getAuthenticatedUserAvatar() {
+    const response = await fetch(`${API_URL}/user/avatar`, {
+        headers: { "Authorization": `Bearer ${getToken()}` }
+    });
+
+    if (!response.ok) 
+        throw new Error();
+
+    const imageBlob = await response.blob();
+    return URL.createObjectURL(imageBlob);
+}
+
 
 async function getPageRequest(url, page = 0, size = 10) {
     const token = getToken();
@@ -279,9 +290,10 @@ function updateFriendsUI() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // Elements.
     DOM.logoutBtn = document.getElementById("logout-btn");
+    DOM.headerAvatarImg = document.querySelector(".header__logo-img");
 
     DOM.usersContainer = document.getElementById("users-container");
     
@@ -300,6 +312,12 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.usersPreviousPageBtn = document.getElementById("users-previous");
     DOM.usersCurrentPage = document.getElementById("users-page");
     DOM.usersNextPageBtn = document.getElementById("users-next");
+
+    try {
+        DOM.headerAvatarImg.src = await getAuthenticatedUserAvatar();
+    } catch (error) {
+        logoImg.src = "./src/assets/avatar.svg"; // Fallback asset path
+    }
 
     // Event Listeners --------------------------------------------------------
     DOM.logoutBtn.addEventListener("click", logout);
