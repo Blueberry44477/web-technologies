@@ -12,6 +12,8 @@ if (!isAuthenticated()) {
     window.location.href = "/index.html";
 }
 
+const DOM = {};
+
 const STATE = {
     users: {
         data: [],
@@ -31,6 +33,8 @@ window.loadFriends = loadFriends;
 window.loadUsers = loadUsers;
 
 const API_URL = "http://localhost:8080/api/v1/secured"
+
+// Functions ------------------------------------------------------------------
 
 function logout() {
     removeToken();
@@ -128,7 +132,30 @@ async function sendFriendRequest(targetUserEmail) {
         friend_email: targetUserEmail
     };
 
-    const response = await fetch(`${API_URL}/friendship`, {
+    const response = await fetch(`${API_URL}/friends/add`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(friendShipRequest)
+    });
+
+    if (!response.ok) { 
+        throw new Error(`${response.message}`);
+    }
+}
+
+async function removeFriend(targetUserEmail) {
+    if (typeof targetUserEmail !== 'string') {
+        throw new TypeError('Target user email must be a string');
+    }
+
+    const friendShipRequest = {
+        friend_email: targetUserEmail
+    };
+
+    const response = await fetch(`${API_URL}/friends/remove`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${getToken()}`,
@@ -189,6 +216,11 @@ function renderFriends(friendsList) {
                 <p class="friends__card-phone">${friend.phone}</p>
                 <p class="friends__card-location">${friend.city ? friend.city + ', ' : ''}${friend.country}</p>
                 <p class="friends__card-sex">${friend.sex}</p>
+            </div>
+            <div class="friends__card-controls">
+                <button type="button" class="action-btn action-btn--primary remove-friend-btn" data-friend-email="${friend.email}">
+                    Remove Friend
+                </button>
             </div>
         `;
         DOM.friendsContainer.appendChild(friendCard);
@@ -275,20 +307,49 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.friendsSortSelect.addEventListener("change", updateFriendsUI);
 
     DOM.usersContainer.addEventListener("click", async (event) => {
-        const friendRequestBtn = event.target.closest(".send-friend-request-btn");
+        const target = event.target;
+        const friendRequestBtn = target.closest(".send-friend-request-btn");
 
-        if (!friendRequestBtn)
+        if (friendRequestBtn) {
+            const targetEmail = friendRequestBtn.dataset.userEmail;
+            try {
+                friendRequestBtn.disabled = true;
+                await sendFriendRequest(targetEmail);
+                friendRequestBtn.innerText = "Request Sent!";
+            } catch (error) {
+                // TODO SNACKBAR
+                friendRequestBtn.innerText = "Be Friends";
+                friendRequestBtn.disabled = false;
+            }
             return;
+        }
+    });
 
-        const targetEmail = friendRequestBtn.dataset.userEmail;
-        try {
-            friendRequestBtn.disabled = true;
-            await sendFriendRequest(targetEmail);
-            friendRequestBtn.innerText = "Request Sent!";
-        } catch (error) {
-            // TODO SNACKBAR
-            friendRequestBtn.innerText = "Be Friends";
-            friendRequestBtn.disabled = false;
+    DOM.friendsContainer.addEventListener("click", async (event) => {
+        const target = event.target;
+
+        const removeFriendBtn = target.closest(".remove-friend-btn");
+
+        if (removeFriendBtn) {
+            const targetEmail = removeFriendBtn.dataset.friendEmail;
+            const friendCard = removeFriendBtn.closest(".friends__card");
+            try {
+                removeFriendBtn.disabled = true;
+                await removeFriend(targetEmail);
+
+                if (friendCard)
+                    friendCard.remove();
+
+                if (DOM.friendsContainer.children.length === 0) {
+                    DOM.friendsContainer.innerHTML = 
+                        `<p class="error-text">You have no friends left in your list.</p>`;
+                    DOM.friendsPaginationControls.classList.add("hidden");
+                }
+                // SHOW SNACKBAR
+            } catch (error) {
+                // TODO
+            }
+            return;
         }
     });
 
