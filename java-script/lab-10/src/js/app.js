@@ -16,13 +16,13 @@ const STATE = {
     users: {
         data: [],
         page: 0,
-        size: 3,
+        size: 30,
         totalPages: 0
     },
     friends: {
         data: [],
         page: 0,
-        size: 8,
+        size: 30,
         totalPages: 0
     }
 }
@@ -102,6 +102,12 @@ function renderUsers(usersList) {
                 <p class="users__card-location">${user.city ? user.city + ', ' : ''}${user.country}</p>
                 <p class="users__card-sex">${user.sex}</p>
             </div>
+
+            <div class="users__card-controls">
+                <button type="button" class="action-btn action-btn--primary send-friend-request-btn" data-user-email="${user.email}">
+                    Be Friends
+                </button>
+            </div>
         `;
         DOM.usersContainer.appendChild(userCard);
     });
@@ -111,6 +117,29 @@ function renderUsers(usersList) {
     DOM.usersPreviousPageBtn.disabled = STATE.users.page === 0;
     DOM.usersNextPageBtn.disabled = STATE.users.page >= STATE.users.totalPages - 1;
     DOM.usersCurrentPage.textContent = `Page ${STATE.users.page + 1} of ${STATE.users.totalPages || 1}`;
+}
+
+async function sendFriendRequest(targetUserEmail) {
+    if (typeof targetUserEmail !== 'string') {
+        throw new TypeError('Target user email must be a string');
+    }
+
+    const friendShipRequest = {
+        friend_email: targetUserEmail
+    };
+
+    const response = await fetch(`${API_URL}/friendship`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(friendShipRequest)
+    });
+
+    if (!response.ok) { 
+        throw new Error(`${response.message}`);
+    }
 }
 
 async function loadFriends() {
@@ -244,6 +273,24 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.logoutBtn.addEventListener("click", logout);
     DOM.friendsSearchInput.addEventListener("input", updateFriendsUI);
     DOM.friendsSortSelect.addEventListener("change", updateFriendsUI);
+
+    DOM.usersContainer.addEventListener("click", async (event) => {
+        const friendRequestBtn = event.target.closest(".send-friend-request-btn");
+
+        if (!friendRequestBtn)
+            return;
+
+        const targetEmail = friendRequestBtn.dataset.userEmail;
+        try {
+            friendRequestBtn.disabled = true;
+            await sendFriendRequest(targetEmail);
+            friendRequestBtn.innerText = "Request Sent!";
+        } catch (error) {
+            // TODO SNACKBAR
+            friendRequestBtn.innerText = "Be Friends";
+            friendRequestBtn.disabled = false;
+        }
+    });
 
     DOM.friendsPreviousPageBtn.addEventListener("click", () => {
         STATE.friends.page--;
